@@ -35,20 +35,14 @@ public class ProductListActivity extends AppCompatActivity {
         client = new ProductClient();
         client.getProducts("search string will go here", new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    JSONArray docs = null;
-                    if(response != null) {
-                        docs = new JSONArray(response);
-                        final ArrayList<Product> products = Product.fromJson(docs);
-                        productAdapter.clear();
-                        for (Product product : products) {
-                            productAdapter.add(product);
-                        }
-                        productAdapter.notifyDataSetChanged();
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                if(response != null) {
+                    final ArrayList<Product> products = Product.fromJson(response);
+                    productAdapter.clear();
+                    for (Product product : products) {
+                        productAdapter.add(product);
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    productAdapter.notifyDataSetChanged();
                 }
             }
         });

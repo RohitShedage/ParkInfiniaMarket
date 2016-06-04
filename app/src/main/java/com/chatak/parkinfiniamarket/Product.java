@@ -45,16 +45,14 @@ public class Product {
         return title;
     }
 
-    /*public String getProductImageUrl() {
+    public String getProductImageUrl() {
         return "http://ec2-54-165-229-42.compute-1.amazonaws.com:3000/api/photo/" + cakeId;
-    }*/
+    }
 
     public static Product fromJson(JSONObject jsonObject) {
         Product product = new Product();
         try {
-            if (jsonObject.has("cakeId"))  {
-                product.setCakeId(jsonObject.getString("cakeId"));
-            }
+            product.setCakeId(jsonObject.getString("cakeId"));
             product.setPrice(jsonObject.getDouble("price"));
             product.setWeight(jsonObject.getString("weight"));
             product.setTitle(jsonObject.getString("title"));
